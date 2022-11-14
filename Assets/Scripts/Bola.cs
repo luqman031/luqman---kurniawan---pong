@@ -19,4 +19,9 @@ public class Bola : MonoBehaviour
     {
         transform.position = new Vector3(resetposition.x,resetposition.y,2);
     }
+
+    public void ActivateSpeedUpControl(float magnitude)
+    {
+        rig.velocity *= magnitude;
+    }
 }
