@@ -10,6 +10,11 @@ public class PowerUpManager : MonoBehaviour
     public List<GameObject> powerUpTemplateList;
     public Vector2 powerUpAreaMin;
     public Vector2 powerUpAreaMax;
+    public float despawn;
+    public float magnitude;
+    public GameObject rightPaddle;
+    public GameObject leftPaddle;
+
     private List<GameObject> powerUpList;
 
     private float timer;
@@ -70,6 +75,45 @@ public class PowerUpManager : MonoBehaviour
         while(powerUpList.Count >0)
         {
             RemovePowerUp(powerUpList[0]);
+        }
+    }
+     public IEnumerator PowerUp (float duration, GameObject paddle)
+    {
+    Debug.Log("Power up started");
+    paddle.GetComponent<Paddle>().ActivatePUSpeedPaddle(paddle);
+    yield return new WaitForSeconds(duration);
+    paddle.GetComponent<Paddle>().DeactivatePUSpeedPaddle(paddle);
+    Debug.Log("Power up ended");
+    }
+
+    public IEnumerator PowerUpExpand (float duration, GameObject paddle)
+    {
+    Debug.Log("Power up started");
+    paddle.GetComponent<Paddle>().ActivatePUScaleUp(paddle);
+    yield return new WaitForSeconds(duration);
+    paddle.GetComponent<Paddle>().DeactivatePUScaleUp(paddle);
+    Debug.Log("Power up ended");
+    }
+     public void StartTimer(bool isRight)
+    {
+        if(isRight)
+        {
+            StartCoroutine(PowerUp(5, rightPaddle));
+        }
+        else
+        {
+            StartCoroutine(PowerUp(5, leftPaddle));
+        }
+    }
+    public void StartTimerExpand(bool isRight)
+    {
+        if(isRight)
+        {
+            StartCoroutine(PowerUpExpand(5, rightPaddle));
+        }
+        else
+        {
+            StartCoroutine(PowerUpExpand(5, leftPaddle));
         }
     }
 }

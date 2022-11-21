@@ -10,6 +10,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void OpenCredit()
+    {
+        SceneManager.LoadScene("Credit");
+    }
+
     public void OpenAuthor()
     {
         Debug.Log("Created By Luqman Kurniawan");
